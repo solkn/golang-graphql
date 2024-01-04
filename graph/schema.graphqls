@@ -1,0 +1,193 @@
+type BaseModel {
+  id: ID
+  created_at: String
+  updated_at: String
+  deleted_at: String
+}
+type Campaign {
+  id: ID
+  name: String
+  begin_date: String
+  events: [Event]
+  user_id:String
+}
+type Event {
+  id: ID
+  title: String
+  description: String
+  startTime: String
+  location_id: String
+  campaign_id: String
+  project_id: String
+  task_id:String
+  tasks: [Task]
+  location: Location
+
+}
+
+type Location {
+  id: ID
+  title: String
+  description: String
+  start_time: String
+  end_time: String
+  street:String
+}
+
+type Project {
+  id: ID
+  name: String
+  begin_date: String
+  events: [Event]
+  user_id:String
+}
+
+type Task {
+  id: ID
+  name: String
+  date: String
+  taken:Boolean
+  event_id:String
+  user_id:String
+  task_assignment:[TaskAssignment]
+}
+
+type TaskAssignment {
+  id: ID
+  task_id:String
+  user_id:String
+  user: User
+  task: Task
+}
+
+type User {
+  id: ID
+  firstName:String
+  lastName:String
+  Email:String
+  phone:String
+  campaigns:[Campaign]
+  projects:[Project]
+}
+
+
+
+
+
+
+
+
+
+
+
+input BaseModelInput {
+  id:ID
+  created_at: String
+  updated_at: String
+  deleted_at: String
+}
+input CampaignInput {
+  id:ID
+  name: String
+  begin_date: String
+  user_id:String
+  
+}
+input EventInput {
+  id:ID
+  Title: String
+  Description: String
+  startTime: ID
+  LocationID: String
+  CampaignID: String
+  ProjectID: String
+  TaskID: String
+}
+input LocationInput {
+  id:ID
+  title: String
+  description: String
+  start_time: String
+  end_time: String
+  street:String
+}
+input ProjectInput {
+  id:ID
+  name: String
+  begin_date: String
+  user_id:String
+}
+input TaskInput {
+  id:ID
+  name: String
+  date: String
+  taken:Boolean
+  event_id:String
+}
+input TaskAssignmentInput {
+  id:ID
+  task_id:String
+  user_id:String
+}
+input UserInput {
+  id:ID
+  firstName:String
+  lastName:String
+  Email:String
+  phone:String
+}
+
+
+
+type Query {
+  getBaseModels: [BaseModel]
+  getCampaigns: [Campaign]
+  getEvents: [Event]
+  getLocations: [Location]
+  getProjects: [Project]
+  getTasks: [Task]
+  getTaskAssignment: [TaskAssignment]
+  getUsers: [User]
+
+  getBaseModelById(id:String): BaseModel
+  getCampaignById(id:String): Campaign
+  getEventById(id:String): Event
+  getLocationById(id:String): Location
+  getProjectById(id:String): Project
+  getTaskById(id:String): Task
+  getTaskAssignmentById(id:String): TaskAssignment
+  getUserById(id:String): User
+   
+}
+
+
+
+type Mutation {
+  createBaseModel(input: BaseModelInput): BaseModel
+  createCampaign(input: CampaignInput): Campaign
+  createEvent(input: EventInput): Event
+  createLocation(input: LocationInput): Location
+  createProject(input: ProjectInput): Project
+  createTask(input: TaskInput): Task
+  createTaskAssignment(input: TaskAssignmentInput): TaskAssignment
+  createUser(input: UserInput): User
+
+  updateBaseModel(input: BaseModelInput): BaseModel
+  updateCampaign(input: CampaignInput): Campaign
+  updateEvent(input: EventInput): Event
+  updateLocation(input: LocationInput): Location
+  updateProject(input: ProjectInput): Project
+  updateTask(input: TaskInput): Task
+  updateTaskAssignment(input: TaskAssignmentInput): TaskAssignment
+  updateUser(input: UserInput): User
+
+  deleteBaseModel(id: String): Int
+  deleteCampaign(id: String): Int
+  deleteEvent(id: String): Int
+  deleteLocation(id: String): Int
+  deleteProject(id: String): Int
+  deleteTask(id: String): Int
+  deleteTaskAssignment(id: String): Int
+  deleteUser(id: String): Int
+
+}
